@@ -15,4 +15,4 @@ sed -i -e "s/# JVM_OPTS=\"$JVM_OPTS -Djava.rmi.server.hostname=<public name>\"/ 
 
 # Start Cassandra
 echo Starting Cassandra...
-cassandra -p /var/run/cassandra.pid
+cassandra -f -p /var/run/cassandra.pid
