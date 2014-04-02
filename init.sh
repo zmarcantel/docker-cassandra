@@ -16,4 +16,4 @@ sed -i -e "s/# JVM_OPTS=\"$JVM_OPTS -Djava.rmi.server.hostname=<public name>\"/ 
 
 # Start Cassandra
 echo Starting Cassandra...
-service cassandra start
+sudo service cassandra start
