@@ -4,6 +4,7 @@
 ##
 
 FROM ubuntu
+MAINTAINER Zachary Marcantel, zach@zed.io, zmarcantel@utexas.edu
 
 # Add PPA for the necessary JDK
 RUN echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu precise main" | tee /etc/apt/sources.list.d/webupd8team-java.list
@@ -32,6 +33,10 @@ RUN apt-get install -y dsc20
 # Deploy startup script
 ADD init.sh /usr/local/bin/cass-dock
 RUN chmod 755 /usr/local/bin/cass-dock
+
+# Deploy shutdown script
+ADD shutdown.sh /usr/local/bin/cass-stop
+RUN chmod 755 /usr/local/bin/cass-stop
 
 EXPOSE 7199 7000 7001 9160 9042
 USER root
