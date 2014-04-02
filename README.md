@@ -22,12 +22,12 @@ If you need help, see [Usage Guide](#usage-guide).
 
 Simply use the builtin `docker` provisioner to pull and start the image.
 
-```ruby
+````ruby
 config.vm.provision "docker" do |d|
     d.pull_images "zmarcantel/cassandra"
     d.run "cass", image: "zmarcantel/cassandra"
 end
-```
+````
 
 
 Running as a cluster
@@ -53,17 +53,14 @@ Start a first image, and then link them all up.
 ##### Link the cluster
 
     docker run -d -name cass1 -link cass0:cass0 zmarcantel/cassandra
-    docker run -d -name cass2 -link cass1:cass1 zmarcantel/cassandra
+    docker run -d -name cass2 -link cass0:cass0 -link cass1:cass1 zmarcantel/cassandra
 
 
 ### Vagrant
 
 We'll do the same as above, but using the `docker` provisioner.
 
-
-##### Start the first image
-
-```ruby
+````ruby
 config.vm.provision "docker" do |d|
     d.pull_images "zmarcantel/cassandra"
 
@@ -76,14 +73,9 @@ config.vm.provision "docker" do |d|
 
     d.run  "cass2",
       image: "zmarcantel/cassandra",
-      cmd: "-link cass1:cass1"
+      cmd: "-link cass0:cass0 -link cass1:cass1"
 end
-```
-
-##### Link the cluster
-
-    docker run -d -name cass1 -link cass0:cass0 zmarcantel/cassandra
-    docker run -d -name cass2 -link cass1:cass1 zmarcantel/cassandra
+````
 
 
 
