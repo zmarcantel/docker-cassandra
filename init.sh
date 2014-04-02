@@ -3,7 +3,11 @@
 IP=`hostname --ip-address`
 SEEDS=`env | grep CASS[0-9]_PORT_9042_TCP_ADDR | sed 's/CASS[0-9]_PORT_9042_TCP_ADDR=//g' | sed -e :a -e N -e 's/\n/,/' -e ta`
 
+if [ -z "$SEEDS" ]; then
+  SEEDS=$IP
+fi
 
+echo "Listening on: "$IP
 echo "Found seeds: "$SEEDS
 
 # Setup Cassandra
