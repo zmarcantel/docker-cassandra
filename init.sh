@@ -3,8 +3,6 @@
 IP=`hostname --ip-address`
 SEEDS=`env | grep CASS[0-9]_PORT_9042_TCP_ADDR | sed 's/CASS[0-9]_PORT_9042_TCP_ADDR=//g' | sed -e :a -e N -e 's/\n/,/' -e ta`
 
-service cassandra stop
-
 echo Configuring Cassandra to listen at $IP with seeds $SEEDS
 
 # Setup Cassandra
@@ -16,4 +14,4 @@ sed -i -e "s/# JVM_OPTS=\"$JVM_OPTS -Djava.rmi.server.hostname=<public name>\"/ 
 
 # Start Cassandra
 echo Starting Cassandra...
-sudo service cassandra start
+sudo service cassandra restart
