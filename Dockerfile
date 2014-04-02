@@ -30,8 +30,8 @@ RUN apt-get update
 RUN apt-get install -y dsc20
 
 # Deploy startup script
-ADD init.sh /usr/local/bin/init.sh
+ADD init.sh /usr/local/bin/cass-dock
 
 EXPOSE 7199 7000 7001 9160 9042
 USER root
-CMD init.sh
+CMD cass-dock
