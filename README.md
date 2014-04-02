@@ -11,7 +11,7 @@ Running as standalone
 
 Just start the image normally
 
-    docker run -d zmarcantel/docker-cassandra
+    docker run -d zmarcantel/cassandra
 
 The necessary ports are exposed, so you can interact with the docker image as you normally do.
 
@@ -24,8 +24,8 @@ Simply use the builtin `docker` provisioner to pull and start the image.
 
 ```ruby
 config.vm.provision "docker" do |d|
-    d.pull_images "zmarcantel/docker-cassandra"
-    d.run "cass", image: "zmarcantel/docker-cassandra"
+    d.pull_images "zmarcantel/cassandra"
+    d.run "cass", image: "zmarcantel/cassandra"
 end
 ```
 
@@ -48,12 +48,12 @@ Start a first image, and then link them all up.
 
 ##### Start the first image
 
-    docker run -d -name cass0 zmarcantel/docker-cassandra
+    docker run -d -name cass0 zmarcantel/cassandra
 
 ##### Link the cluster
 
-    docker run -d -name cass1 -link cass0:cass0 zmarcantel/docker-cassandra
-    docker run -d -name cass2 -link cass1:cass1 zmarcantel/docker-cassandra
+    docker run -d -name cass1 -link cass0:cass0 zmarcantel/cassandra
+    docker run -d -name cass2 -link cass1:cass1 zmarcantel/cassandra
 
 
 ### Vagrant
@@ -65,25 +65,25 @@ We'll do the same as above, but using the `docker` provisioner.
 
 ```ruby
 config.vm.provision "docker" do |d|
-    d.pull_images "zmarcantel/docker-cassandra"
+    d.pull_images "zmarcantel/cassandra"
 
     d.run  "cass0",
-      image: "zmarcantel/docker-cassandra"
+      image: "zmarcantel/cassandra"
 
     d.run  "cass1",
-      image: "zmarcantel/docker-cassandra",
+      image: "zmarcantel/cassandra",
       cmd: "-link cass0:cass0"
 
     d.run  "cass2",
-      image: "zmarcantel/docker-cassandra",
+      image: "zmarcantel/cassandra",
       cmd: "-link cass1:cass1"
 end
 ```
 
 ##### Link the cluster
 
-    docker run -d -name cass1 -link cass0:cass0 zmarcantel/docker-cassandra
-    docker run -d -name cass2 -link cass1:cass1 zmarcantel/docker-cassandra
+    docker run -d -name cass1 -link cass0:cass0 zmarcantel/cassandra
+    docker run -d -name cass2 -link cass1:cass1 zmarcantel/cassandra
 
 
 
@@ -94,11 +94,11 @@ Usage Guide
 
 Get image ID for `docker-cassandra` on your machine
 
-    docker ps | grep "zmarcantel/docker-cassandra" | head -n1 | cut -d' ' -f1
+    docker ps | grep "zmarcantel/cassandra" | head -n1 | cut -d' ' -f1
 
 __This is a very convenient export: the image ID__
 
-    export CASSDOCK_ID=`docker ps | grep "zmarcantel/docker-cassandra" | head -n1 | cut -d' ' -f1`
+    export CASSDOCK_ID=`docker ps | grep "zmarcantel/cassandra" | head -n1 | cut -d' ' -f1`
 
 List the IPs of containers running `docker-cassandra`
 
