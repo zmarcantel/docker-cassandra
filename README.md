@@ -86,11 +86,11 @@ Usage Guide
 
 Get image ID for `docker-cassandra` on your machine
 
-    docker ps | grep "zmarcantel/cassandra" | head -n1 | cut -d' ' -f1
+    docker images | grep "zmarcantel/cassandra" | sed -e "s/\s\+/ /g" | cut -d' ' -f3
 
 __This is a very convenient export: the image ID__
 
-    export CASSDOCK_ID=`docker ps | grep "zmarcantel/cassandra" | head -n1 | cut -d' ' -f1`
+    export CASSDOCK_ID=`docker images | grep "zmarcantel/cassandra" | sed -e "s/\s\+/ /g" | cut -d' ' -f3`
 
 List the IPs of containers running `docker-cassandra`
 
