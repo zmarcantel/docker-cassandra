@@ -62,18 +62,17 @@ We'll do the same as above, but using the `docker` provisioner.
 
 ````ruby
 config.vm.provision "docker" do |d|
-    d.pull_images "zmarcantel/cassandra"
-
-    d.run  "cass0",
+    d.run "seed", auto_assign_name: false,
+      args: "--name cass0",
       image: "zmarcantel/cassandra"
 
-    d.run  "cass1",
-      image: "zmarcantel/cassandra",
-      cmd: "-link cass0:cass0"
+    d.run "first", auto_assign_name: false,
+      args: "--name cass1 --link cass0:cass0",
+      image: "zmarcantel/cassandra"
 
-    d.run  "cass2",
-      image: "zmarcantel/cassandra",
-      cmd: "-link cass0:cass0 -link cass1:cass1"
+    d.run "second", auto_assign_name: false,
+      args: "--name cass2 --link cass0:cass0 --link cass1:cass1",
+      image: "zmarcantel/cassandra"
 end
 ````
 
