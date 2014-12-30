@@ -30,6 +30,9 @@ RUN curl -L http://debian.datastax.com/debian/repo_key | sudo apt-key add -
 RUN apt-get update
 RUN apt-get install -y dsc20 datastax-agent
 
+# Start the datastax-agent
+RUN service datastax-agent start
+
 # Deploy startup script
 ADD init.sh /usr/local/bin/cass-dock
 RUN chmod 755 /usr/local/bin/cass-dock
